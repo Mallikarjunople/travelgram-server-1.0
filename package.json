@@ -2,7 +2,11 @@
   "name": "expressproj",
   "version": "1.0.0",
   "engines": {
-    "node": "12.22.1"
+    "node": "12.22.1",
+    "npm":"7.19.1"
+  },
+  "optionalDependencies": {
+    "fsevents": "2.1.2"
   },
   "description": "",
   "main": "index.js",
