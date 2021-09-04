@@ -70,14 +70,14 @@ app.use("/feedback", feedbackRoute);
 //   next(error);
 // });
 
-app.use((error, req, res, next) => {
-  res.status(error.status || 500);
-  res.json({
-    error: {
-      message: error.message,
-    },
-  });
-});
+// app.use((error, req, res, next) => {
+//   res.status(error.status || 500);
+//   res.json({
+//     error: {
+//       message: error.message,
+//     },
+//   });
+// });
 
 app.get("/", function (req, res) {
   res.send("we are at home");
