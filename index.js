@@ -8,7 +8,6 @@ const feedbackRoute = require("./routes/feedbacks");
 const userRoute = require("./routes/users");
 const blogRoute = require("./routes/blogs");
 const cityRoute = require("./routes/Cities");
-var socket = require("socket.io");
 const morgan = require("morgan");
 const checkAuth = require("./middleware/check-auth");
 const isAdmin = require("./middleware/isadmin");
@@ -64,12 +63,12 @@ app.use("/City", checkAuth, cityRoute);
 app.use("/tags", checkAuth, tagRoute);
 app.use("/feedback", feedbackRoute);
 
-app.use((req, res, next) => {
-  const error = new Error("Not Found");
-  error.status = 404;
+// app.use((req, res, next) => {
+//   const error = new Error("Not Found");
+//   error.status = 404;
 
-  next(error);
-});
+//   next(error);
+// });
 
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
@@ -88,15 +87,6 @@ server = app.listen( process.env.PORT || 5000, function () {
   console.log("Server started successfully");
 });
 
-// io = socket(server);
-
-// io.on("connection", (socket) => {
-//   console.log(socket.id);
-
-//   socket.on("SEND_MESSAGE", function (data) {
-//     io.emit("RECEIVE_MESSAGE", data);
-//   });
-// });
 
 //baseUrl 
 // module.exports.link = "https://travelgram-project.herokuapp.com/";
