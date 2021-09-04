@@ -13,7 +13,9 @@ const checkAuth = require("./middleware/check-auth");
 const isAdmin = require("./middleware/isadmin");
 const adminRoute = require("./routes/admin");
 const tagRoute = require("./routes/tag");
-require("dotenv/config");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 //require the route handlers
 // app.use(express.static("public"));
@@ -54,6 +56,9 @@ app.use((req, res, next) => {
 
 //routes
 //app.use('/posts',postsRoute);
+app.get("/", function (req, res) {
+  res.send("we are at home");
+});
 app.use("/users", userRoute);
 app.use("/blogs", blogRoute);
 
@@ -62,6 +67,7 @@ app.use("/admin", checkAuth, isAdmin, adminRoute);
 app.use("/City", checkAuth, cityRoute);
 app.use("/tags", checkAuth, tagRoute);
 app.use("/feedback", feedbackRoute);
+
 
 // app.use((req, res, next) => {
 //   const error = new Error("Not Found");
@@ -79,11 +85,9 @@ app.use("/feedback", feedbackRoute);
 //   });
 // });
 
-app.get("/", function (req, res) {
-  res.send("we are at home");
-});
 
-server = app.listen( process.env.PORT || 5000, function () {
+
+app.listen( process.env.PORT || 5000, function () {
   console.log("Server started successfully");
 });
 
