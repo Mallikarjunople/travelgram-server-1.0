@@ -17,7 +17,7 @@ const tagRoute = require("./routes/tag");
 require("dotenv/config");
 
 //require the route handlers
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
