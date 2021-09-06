@@ -4,20 +4,11 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const feedbackRoute = require("./routes/feedbacks");
-const userRoute = require("./routes/users");
-const blogRoute = require("./routes/blogs");
-const cityRoute = require("./routes/Cities");
 const morgan = require("morgan");
-const checkAuth = require("./middleware/check-auth");
-const isAdmin = require("./middleware/isadmin");
-const adminRoute = require("./routes/admin");
-const tagRoute = require("./routes/tag");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
-//require the route handlers
 // app.use(express.static("public"));
 app.use(cors());
 app.use(bodyParser.json());
@@ -59,15 +50,28 @@ app.use((req, res, next) => {
 app.get("/", function (req, res) {
   res.send("we are at home");
 });
+
+// Routes handlers
+const LoginRegister = require("./routes/register-login");
+const feedbackRoute = require("./routes/feedbacks");
+const userRoute = require("./routes/users");
+const blogRoute = require("./routes/blogs");
+const cityRoute = require("./routes/Cities");
+const checkAuth = require("./middleware/check-auth");
+const isAdmin = require("./middleware/isadmin");
+const adminRoute = require("./routes/admin");
+const tagRoute = require("./routes/tag");
+
+
+//Routes..
+app.use("/auth", LoginRegister)
 app.use("/users", userRoute);
 app.use("/blogs", blogRoute);
-
 app.use("/admin", checkAuth, isAdmin, adminRoute);
-
-app.use("/City", checkAuth, cityRoute);
-app.use("/tags", checkAuth, tagRoute);
+// app.use("/admin", adminRoute);
+app.use("/City", cityRoute);
+app.use("/tags", tagRoute);
 app.use("/feedback", feedbackRoute);
-
 
 // app.use((req, res, next) => {
 //   const error = new Error("Not Found");
@@ -85,12 +89,10 @@ app.use("/feedback", feedbackRoute);
 //   });
 // });
 
-
-
-app.listen( process.env.PORT || 5000, function () {
-  console.log("Server started successfully");
+app.listen(process.env.PORT || 5000, function () {
+  let port = process.env.PORT || 5000;
+  console.log("Server started successfully at " + port);
 });
 
-
-//baseUrl 
-// module.exports.link = "https://travelgram-project.herokuapp.com/";
+//baseUrl
+module.exports.link = "http://localhost:8001/";
