@@ -38,6 +38,8 @@ exports.GetAllBlogs = async (req, res) => {
 exports.PostBlog = async (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
   var decoded = jwt_decode(token);
+//  console.log("*******")
+//   console.log(res.body);
 
   // console.log(req.userData.userId);
   // console.log(decoded.userId);
@@ -117,22 +119,26 @@ exports.GetBlogById = async (req, res) => {
       return res.status(404).json({
         message: "Blog not found",
       });
+      
     }
-    // console.log(findBlog); // we are not getting blog , bcz it is not approved till now
+    // console.log("work...");
+    // console.log(findBlog);  we are not getting blog , bcz it is not approved till now
 
-    const uId = findBlog.user.blogs;
-    console.log("uid" + uId);
+    // const uId = findBlog.user.blogs;
+    //uid = 61353ff85a76d99814eb65b4
+    // req.params.blogId = 61366e19646b409af8c5ddbe
+    // console.log("uid" + uId);
 
-    var flag = false;
+    // var flag = false;
 
-    for (var i = 0; i < uId.length; i++) {
-      if (uId[i] == req.params.blogId) {
-        flag = true;
-        break;
-      }
-    }
+    // for (var i = 0; i < uId.length; i++) {
+    //   if (uId[i] == req.params.blogId) {
+    //     flag = true;
+    //     break;
+    //   }
+    // }
 
-    if (flag) {
+    // if (flag) {
       res.status(200).json({
         blog: findBlog,
         // request: {
@@ -140,11 +146,11 @@ exports.GetBlogById = async (req, res) => {
         //   url: baseUrl.link + "blogs",
         // },
       });
-    } else {
-      res.status(500).json({
-        mesaage: "Blog doesn't belong to you",
-      });
-    }
+    // } else {
+      // res.status(500).json({
+      //   mesaage: "Blog doesn't belong to you",
+      // });
+    // }
   } catch (err) {
     res.status(500).json({
       error: err,
