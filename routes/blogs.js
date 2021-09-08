@@ -16,7 +16,7 @@ const multer = require("multer");
 // const upload = multer({ storage: storage });
 
 //Get All Blogs
-router.get("/", checkAuth, blogController.GetAllBlogs);
+router.get("/", blogController.GetAllBlogs);
 
 // Post A Blog
 router.post("/", checkAuth, blogController.PostBlog);
