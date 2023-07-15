@@ -95,4 +95,4 @@ app.listen(process.env.PORT || 5000, function () {
 });
 
 //baseUrl
-module.exports.link = "http://localhost:8001/";
+// module.exports.link = "http://localhost:8001/";

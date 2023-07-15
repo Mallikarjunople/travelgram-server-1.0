@@ -26,11 +26,14 @@ const pblogSchema = mongoose.Schema({
     Pictures:{
         type:String
     },
-    date: { type: Date, default: Date.now },
-      flag:{
-          type:Number,
-          default:0
-      }
+    date: { 
+        type: Date,
+        default: Date.now 
+    },
+    flag:{
+        type:Number,
+        default:0
+    }
 });
 
 module.exports = mongoose.model('PBlog',pblogSchema);
